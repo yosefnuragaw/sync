@@ -1,0 +1,24 @@
+# persona-1 on Mistral-7B, unsupervised vectors: SIM's offline decode assignment with a
+# dense prefill pass.
+#
+#   python generate_answers.py --config billy/configs/persona-1/mistral/sync-static.yaml
+
+id: "mistral-7b-sync-static"
+model_name_or_path: "mistralai/Mistral-7B-Instruct-v0.3"
+behavior: "persona-1"
+total_layer: 32
+
+# Every layer watches; which ones inject is decided per persona below.
+layer: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+vec_dir: ["billy/vector/power-seeking/mistral/all", "billy/vector/wealth-seeking/mistral/all", "billy/vector/coordinate-other/mistral/all", "billy/vector/corrigible-less/mistral/all"]
+answer_dir: "billy/generation_results/persona-1/mistral/sync-static"
+apply_type: "sync-static"
+
+# Prefill ramp exponent, r_t = ((T-t)/T)**rho. 0 is a flat full-magnitude pass.
+rho: 0.0
+
+# Layer assignment, which must be a sweep ranked on these vectors.
+ablation_csv: "billy/ablation/persona-1/mistral/layer.csv"
+
+# Decode steps of cosine history before the gate leaves its uniform warm-up.
+K: 32

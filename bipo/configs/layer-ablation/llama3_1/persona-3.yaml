@@ -1,0 +1,23 @@
+# Per-layer probe sweep over the supervised vectors for persona-3 on Llama-3.1-8B.
+#
+#   python ablation_layer.py --config bipo/configs/layer-ablation/llama3_1/persona-3.yaml
+
+id: "llama3-1-8b-bipo-layer-ablation-persona-3"
+model_name_or_path: "meta-llama/Llama-3.1-8B-Instruct"
+behavior: "persona-3"
+total_layer: 32
+
+# Candidate layers, swept one at a time.
+layer: []            # empty = sweep every layer, 0 .. total_layer-1
+vec_dir: ["bipo/vector/evil/llama-3/all", "bipo/vector/hallucinating/llama-3/all", "bipo/vector/sycophantic/llama-3/all"]
+apply_type: "billy"
+
+# 'reference' keeps the direction and takes ref_vec_dir's per-layer norm.
+vec_scale: "reference"
+ref_vec_dir: ["billy/vector/evil/llama-3/all", "billy/vector/hallucinating/llama-3/all", "billy/vector/sycophantic/llama-3/all"]
+multiplier: 1.0
+num_samples: 30
+
+# Best layers per persona written to layer.csv; layer_all.csv keeps the sweep.
+top_k: 3
+output_dir: "bipo/ablation/persona-3/llama-3"

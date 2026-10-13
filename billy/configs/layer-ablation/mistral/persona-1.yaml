@@ -1,0 +1,19 @@
+# Per-layer probe sweep over the unsupervised vectors for persona-1 on Mistral-7B.
+#
+#   python ablation_layer.py --config billy/configs/layer-ablation/mistral/persona-1.yaml
+
+id: "mistral-7b-layer-ablation-persona-1"
+model_name_or_path: "mistralai/Mistral-7B-Instruct-v0.3"
+behavior: "persona-1"
+total_layer: 32
+
+# Candidate layers, swept one at a time.
+layer: []            # empty = sweep every layer, 0 .. total_layer-1
+vec_dir: ["billy/vector/power-seeking/mistral/all","billy/vector/wealth-seeking/mistral/all","billy/vector/corrigible-less/mistral/all","billy/vector/coordinate-other/mistral/all"]
+apply_type: "billy"
+multiplier: 1.0
+num_samples: 30
+
+# Best layers per persona written to layer.csv; layer_all.csv keeps the sweep.
+top_k: 5
+output_dir: "billy/ablation/persona-1/mistral"

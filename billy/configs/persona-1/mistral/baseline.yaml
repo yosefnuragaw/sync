@@ -1,0 +1,8 @@
+# Unsteered baseline for persona-1 on Mistral-7B.
+#
+#   python generate_answers.py --config billy/configs/persona-1/mistral/baseline.yaml --baseline
+
+id: "mistral-7b-baseline"
+model_name_or_path: "mistralai/Mistral-7B-Instruct-v0.3"
+behavior: "persona-1"
+answer_dir: "billy/generation_results/persona-1/mistral/baseline"

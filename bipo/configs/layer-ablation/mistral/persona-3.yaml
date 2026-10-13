@@ -1,0 +1,23 @@
+# Per-layer probe sweep over the supervised vectors for persona-3 on Mistral-7B.
+#
+#   python ablation_layer.py --config bipo/configs/layer-ablation/mistral/persona-3.yaml
+
+id: "mistral-7b-bipo-layer-ablation-persona-3"
+model_name_or_path: "mistralai/Mistral-7B-Instruct-v0.3"
+behavior: "persona-3"
+total_layer: 32
+
+# Candidate layers, swept one at a time.
+layer: []            # empty = sweep every layer, 0 .. total_layer-1
+vec_dir: ["bipo/vector/evil/mistral/all", "bipo/vector/hallucinating/mistral/all", "bipo/vector/sycophantic/mistral/all"]
+apply_type: "billy"
+
+# 'reference' keeps the direction and takes ref_vec_dir's per-layer norm.
+vec_scale: "reference"
+ref_vec_dir: ["billy/vector/evil/mistral/all", "billy/vector/hallucinating/mistral/all", "billy/vector/sycophantic/mistral/all"]
+multiplier: 1.0
+num_samples: 30
+
+# Best layers per persona written to layer.csv; layer_all.csv keeps the sweep.
+top_k: 3
+output_dir: "bipo/ablation/persona-3/mistral"

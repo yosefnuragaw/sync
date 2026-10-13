@@ -1,0 +1,27 @@
+# BiPO training for machiavellianism on Llama-3.1-8B: one learned steering vector per
+# layer.
+#
+#   python bipo/train.py --config bipo/configs/train/llama3_1/machiavellianism.yaml
+
+id: "llama3-1-8b-bipo-machiavellianism"
+model_name_or_path: "meta-llama/Llama-3.1-8B-Instruct"
+behavior: "machiavellianism"
+total_layer: 32
+
+# One trainable vector per layer listed here.
+layer: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+vec_dir: "bipo/vector/machiavellianism/llama-3/all"
+beta: 0.1
+learning_rate: 5.0e-4
+lr_scheduler_type: "cosine"
+warmup_steps: 20
+weight_decay: 0.05
+num_train_epochs: 20
+per_device_train_batch_size: 4
+per_device_eval_batch_size: 4
+gradient_accumulation_steps: 1
+max_prompt_length: 2048
+max_length: 2048
+
+# Held out from train.csv where the behaviour ships no test.csv.
+val_fraction: 0.1

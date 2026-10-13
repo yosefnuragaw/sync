@@ -1,0 +1,14 @@
+# persona-1 on Mistral-7B, unsupervised vectors: averaged into one direction and
+# injected at a single layer.
+#
+#   python generate_answers.py --config billy/configs/persona-1/mistral/13-billy.yaml
+
+id: "mistral-7b-13-billy"
+model_name_or_path: "mistralai/Mistral-7B-Instruct-v0.3"
+behavior: "persona-1"
+total_layer: 32
+layer: [13]
+vec_dir: ["billy/vector/power-seeking/mistral/all","billy/vector/wealth-seeking/mistral/all","billy/vector/coordinate-other/mistral/all","billy/vector/corrigible-less/mistral/all"]
+answer_dir: "billy/generation_results/persona-1/mistral/13-billy"
+apply_type: "billy"
+multipliers: [-1.5, -1.0, -0.5, 0.5, 1.0, 1.5]

@@ -1,0 +1,18 @@
+# persona-1 on Mistral-7B, supervised vectors: averaged into one direction and injected
+# at a single layer.
+#
+#   python generate_answers.py --config bipo/configs/persona-1/mistral/8-billy-ref.yaml
+
+id: "mistral-7b-bipo-8-billy-ref"
+model_name_or_path: "mistralai/Mistral-7B-Instruct-v0.3"
+behavior: "persona-1"
+total_layer: 32
+layer: [8]
+vec_dir: ["bipo/vector/power-seeking/mistral/all", "bipo/vector/wealth-seeking/mistral/all", "bipo/vector/corrigible-less/mistral/all", "bipo/vector/coordinate-other/mistral/all"]
+answer_dir: "bipo/generation_results/persona-1/mistral/8-billy-ref"
+apply_type: "billy"
+
+# 'reference' keeps the direction and takes ref_vec_dir's per-layer norm.
+vec_scale: "reference"
+ref_vec_dir: ["billy/vector/power-seeking/mistral/all", "billy/vector/wealth-seeking/mistral/all", "billy/vector/corrigible-less/mistral/all", "billy/vector/coordinate-other/mistral/all"]
+multipliers: [-1.5, -1.0, -0.5, 0.5, 1.0, 1.5]

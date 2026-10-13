@@ -1,0 +1,19 @@
+# Per-layer probe sweep over the unsupervised vectors for persona-1 on Llama-3.1-8B.
+#
+#   python ablation_layer.py --config billy/configs/layer-ablation/llama3_1/persona-1.yaml
+
+id: "llama3-1-8b-layer-ablation-persona-1"
+model_name_or_path: "meta-llama/Llama-3.1-8B-Instruct"
+behavior: "persona-1"
+total_layer: 32
+
+# Candidate layers, swept one at a time.
+layer: []            # empty = sweep every layer, 0 .. total_layer-1
+vec_dir: ["billy/vector/power-seeking/llama-3/all","billy/vector/wealth-seeking/llama-3/all","billy/vector/corrigible-less/llama-3/all","billy/vector/coordinate-other/llama-3/all"]
+apply_type: "billy"
+multiplier: 1.0
+num_samples: 30
+
+# Best layers per persona written to layer.csv; layer_all.csv keeps the sweep.
+top_k: 5
+output_dir: "billy/ablation/persona-1/llama-3"

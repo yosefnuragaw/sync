@@ -1,0 +1,14 @@
+# persona-1 on Llama-3.1-8B, unsupervised vectors: averaged into one direction and
+# injected at a single layer.
+#
+#   python generate_answers.py --config billy/configs/persona-1/llama3_1/14-billy.yaml
+
+id: "llama3-1-8b-14-billy"
+model_name_or_path: "meta-llama/Llama-3.1-8B-Instruct"
+behavior: "persona-1"
+total_layer: 32
+layer: [14]
+vec_dir: ["billy/vector/power-seeking/llama-3/all","billy/vector/wealth-seeking/llama-3/all","billy/vector/coordinate-other/llama-3/all","billy/vector/corrigible-less/llama-3/all"]
+answer_dir: "billy/generation_results/persona-1/llama-3/14-billy"
+apply_type: "billy"
+multipliers: [-1.5, -1.0, -0.5, 0.5, 1.0, 1.5]

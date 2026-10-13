@@ -1,0 +1,29 @@
+# persona-1 on Llama-3.1-8B, supervised vectors: SIM's offline decode assignment with a
+# dense prefill pass.
+#
+#   python generate_answers.py --config bipo/configs/persona-1/llama3_1/sync-static.yaml
+
+id: "llama3-1-8b-bipo-sync-static"
+model_name_or_path: "meta-llama/Llama-3.1-8B-Instruct"
+behavior: "persona-1"
+total_layer: 32
+
+# Every layer watches; which ones inject is decided per persona below.
+layer: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31]
+multipliers: [-1.5, -1.0, -0.5, 0.5, 1.0, 1.5]
+vec_dir: ["bipo/vector/power-seeking/llama-3/all", "bipo/vector/wealth-seeking/llama-3/all", "bipo/vector/coordinate-other/llama-3/all", "bipo/vector/corrigible-less/llama-3/all"]
+answer_dir: "bipo/generation_results/persona-1/llama-3/sync-static"
+apply_type: "sync-static"
+
+# Prefill ramp exponent, r_t = ((T-t)/T)**rho. 0 is a flat full-magnitude pass.
+rho: 0.0
+
+# Layer assignment, which must be a sweep ranked on these vectors.
+ablation_csv: "bipo/ablation/persona-1/llama-3/layer.csv"
+
+# 'reference' keeps the direction and takes ref_vec_dir's per-layer norm.
+vec_scale: "reference"
+ref_vec_dir: ["billy/vector/power-seeking/llama-3/all", "billy/vector/wealth-seeking/llama-3/all", "billy/vector/coordinate-other/llama-3/all", "billy/vector/corrigible-less/llama-3/all"]
+
+# Decode steps of cosine history before the gate leaves its uniform warm-up.
+K: 32

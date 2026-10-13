@@ -1,0 +1,8 @@
+# Unsteered baseline for persona-1 on Llama-3.1-8B.
+#
+#   python generate_answers.py --config billy/configs/persona-1/llama3_1/baseline.yaml --baseline
+
+id: "llama3-1-8b-baseline"
+model_name_or_path: "meta-llama/Llama-3.1-8B-Instruct"
+behavior: "persona-1"
+answer_dir: "billy/generation_results/persona-1/llama-3/baseline"
